@@ -12,10 +12,9 @@
         android:layout_height="wrap_content"
         android:text="send" />
 
-    <TextView
-        android:id="@+id/tvResult"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMovies"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

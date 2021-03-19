@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class OmdbApiResponse (
     @SerializedName("Response")
-    val Response:Boolean,
+    val response:Boolean,
     @SerializedName("Search")
-    val Search:List<Search>,
+    val search:List<Search>,
     @SerializedName("totalResults")
     val totalResults:Int
 )
