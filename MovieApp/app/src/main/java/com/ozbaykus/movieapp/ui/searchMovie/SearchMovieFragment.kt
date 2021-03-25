@@ -12,9 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ozbaykus.movieapp.MainApp
 import com.ozbaykus.movieapp.R
 import com.ozbaykus.movieapp.model.Search
+import com.ozbaykus.movieapp.utils.hide
+import com.ozbaykus.movieapp.utils.hideKeyboard
+import com.ozbaykus.movieapp.utils.show
 import com.ozbaykus.movieapp.utils.viewModelProvider
 import kotlinx.android.synthetic.main.fragment_search_movie.*
 import kotlinx.android.synthetic.main.fragment_search_movie.view.*
+import kotlinx.android.synthetic.main.row_search_box.*
 import javax.inject.Inject
 
 class SearchMovieFragment : Fragment() {
@@ -36,8 +40,10 @@ class SearchMovieFragment : Fragment() {
         appComponents.inject(this)
         val view = inflater.inflate(R.layout.fragment_search_movie, container, false)
         view.buttonSend.setOnClickListener {
-            getViewModel().searchMovieByName("summer")
-            it.visibility=View.GONE
+            it.hideKeyboard()
+            if (!editTextSearchBox.text.toString().isNullOrBlank()) {
+                getViewModel().searchMovieByName(editTextSearchBox.text.toString())
+            }
         }
 
         return view
@@ -45,9 +51,14 @@ class SearchMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getViewModel().showLoading.observe(this, Observer { showLoading ->
+            recyclerViewMovies.hide()
+            if (showLoading) progressBar.show()
+            else progressBar.hide()
+        })
 
         getViewModel().resultSearch.observe(this, Observer { response ->
-            response?.let {
+            response?.takeIf { it.response }?.let {
                 searchMovieAdapter = SearchMovieAdapter(response.search)
                 recyclerViewMovies.adapter = searchMovieAdapter
                 searchMovieAdapter.setOnItemClickListener(object :
@@ -55,9 +66,15 @@ class SearchMovieFragment : Fragment() {
                     override fun onItemClick(search: Search) {
                         Toast.makeText(activity, search.title, Toast.LENGTH_LONG).show()
                     }
-
                 })
                 recyclerViewMovies.layoutManager = GridLayoutManager(activity, 2)
+                textViewNoResult.hide()
+                recyclerViewMovies.show()
+            } ?: kotlin.run {
+                textViewNoResult.text =
+                    getString(R.string.error_no_result, editTextSearchBox.text.toString())
+                textViewNoResult.show()
+                recyclerViewMovies.hide()
             }
         })
     }

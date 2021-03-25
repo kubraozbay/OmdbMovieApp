@@ -3,7 +3,6 @@ package com.ozbaykus.movieapp.ui.searchMovie
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +42,8 @@ class SearchMovieAdapter(
         private val imageViewPoster: ImageView = itemView.findViewById(R.id.imageViewPoster)
         fun bindItems(item: Search) {
             textViewMovieName.text = item.title
-            Glide.with(itemView.context).load(item.poster).into(imageViewPoster);
+            Glide.with(itemView.context).load(item.poster).placeholder(R.drawable.board)
+                .into(imageViewPoster)
         }
 
         interface SearchMovieItemClickListener {

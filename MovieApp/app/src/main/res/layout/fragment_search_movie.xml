@@ -6,15 +6,58 @@
     android:orientation="vertical"
     tools:context=".ui.searchMovie.SearchMovieFragment">
 
-    <Button
-        android:id="@+id/buttonSend"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="send" />
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/searchBox"
+            layout="@layout/row_search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/buttonSend"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dimen_space_s"
+            android:layout_marginLeft="@dimen/dimen_space_s"
+            android:src="@drawable/ic_search"
+            android:background="@drawable/button_selector"
+            android:text="@string/search"
+            android:layout_weight="1"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewNoResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_space_s"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMovies"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_space_s" />
+
 
 </LinearLayout>

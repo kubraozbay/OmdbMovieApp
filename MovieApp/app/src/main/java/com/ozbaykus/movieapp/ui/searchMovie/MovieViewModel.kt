@@ -14,25 +14,31 @@ class MovieViewModel @Inject constructor(
     private val repositoryImpl: AppRepositoryImpl
 ) : ViewModel() {
 
-    private var _resultSearch= MutableLiveData<OmdbApiResponse>()
+    private var _resultSearch = MutableLiveData<OmdbApiResponse>()
     var resultSearch: LiveData<OmdbApiResponse> = _resultSearch
 
     private var _errorMessage = MutableLiveData<String>()
     var errorMessage: LiveData<String> = _errorMessage
 
-    fun searchMovieByName(movieName:String) {
+    private var _showLoading = MutableLiveData<Boolean>()
+    var showLoading: LiveData<Boolean> = _showLoading
+
+    fun searchMovieByName(movieName: String) {
+        _showLoading.postValue(true)
         viewModelScope.launch {
             try {
                 when (val response = repositoryImpl.movieSearch(movieName)) {
                     is ResultData.Success -> {
+                        _showLoading.postValue(false)
                         _resultSearch.postValue(response.data)
                     }
                     is ResultData.Error -> {
+                        _showLoading.postValue(false)
                         _errorMessage.postValue(response.exception.toString())
                     }
                 }
             } catch (e: Exception) {
-
+                _showLoading.postValue(false)
                 _errorMessage.postValue(e.message)
             }
         }

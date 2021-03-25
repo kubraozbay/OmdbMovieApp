@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
     <color name="color_6A5753">#6A5753</color>
-    <color name="color_111111">#111111</color>
     <color name="color_3a3a3a">#3a3a3a</color>
-    <color name="color_F0637B">#F0637B</color>
-    <color name="color_FA897B">#FA897B</color>
+    <color name="colorGreyEditText">#A8A6A6</color>
+    <color name="colorGray">#7f838a</color>
 </resources>
