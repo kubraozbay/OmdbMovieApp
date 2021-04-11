@@ -19,4 +19,4 @@ In order to run this project , you will need to create an account and get a key 
 
 Screenshots
 -----------
-![MovieApp](screen_record.gif "MovieApp ")
+![MovieApp](screenshot/screen_record.gif "MovieApp ")
