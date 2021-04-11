@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_space_s"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_space_s"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="@dimen/dimen_space_s"/>
+
+        <include
+            android:id="@+id/year"
+            layout="@layout/table_cell_view" />
+
+        <include
+
+            android:id="@+id/runtime"
+            layout="@layout/table_cell_view" />
+
+        <include
+            android:id="@+id/genre"
+            layout="@layout/table_cell_view" />
+
+        <include
+            android:id="@+id/director"
+            layout="@layout/table_cell_view" />
+
+        <include
+            android:id="@+id/writer"
+            layout="@layout/table_cell_view" />
+
+        <include
+            android:id="@+id/stars"
+            layout="@layout/table_cell_view" />
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

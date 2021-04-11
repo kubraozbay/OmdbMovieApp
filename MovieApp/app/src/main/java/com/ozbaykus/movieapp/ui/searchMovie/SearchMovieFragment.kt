@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ozbaykus.movieapp.MainApp
 import com.ozbaykus.movieapp.R
 import com.ozbaykus.movieapp.model.Search
+import com.ozbaykus.movieapp.ui.movieDetail.MovieDetailFragment
 import com.ozbaykus.movieapp.utils.hide
 import com.ozbaykus.movieapp.utils.hideKeyboard
 import com.ozbaykus.movieapp.utils.show
@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_search_movie.*
 import kotlinx.android.synthetic.main.fragment_search_movie.view.*
 import kotlinx.android.synthetic.main.row_search_box.*
 import javax.inject.Inject
+
 
 class SearchMovieFragment : Fragment() {
 
@@ -64,7 +65,13 @@ class SearchMovieFragment : Fragment() {
                 searchMovieAdapter.setOnItemClickListener(object :
                     SearchMovieAdapter.SearchMovieViewHolder.SearchMovieItemClickListener {
                     override fun onItemClick(search: Search) {
-                        Toast.makeText(activity, search.title, Toast.LENGTH_LONG).show()
+                        val fragment = MovieDetailFragment()
+                        val args = Bundle()
+                        args.putString("imdbId", search.imdbID)
+                        fragment.arguments = args
+                        activity!!.supportFragmentManager.beginTransaction()
+                            .add(R.id.frame_layout_container, fragment).addToBackStack(null)
+                            .commit()
                     }
                 })
                 recyclerViewMovies.layoutManager = GridLayoutManager(activity, 2)
@@ -78,6 +85,4 @@ class SearchMovieFragment : Fragment() {
             }
         })
     }
-
-
 }

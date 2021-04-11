@@ -17,6 +17,14 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, container: Int) {
         .commit()
 }
 
+fun FragmentActivity.addFragment(fragment: Fragment, container: Int) {
+    val className = fragment.javaClass.name
+    supportFragmentManager
+        .beginTransaction()
+        .add(container, fragment, className)
+        .commit()
+}
+
 inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
     provider: ViewModelProvider.Factory
 ) = ViewModelProvider(this, provider).get(VM::class.java)

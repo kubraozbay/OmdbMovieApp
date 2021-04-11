@@ -3,5 +3,6 @@
 
     <string name="error_no_result">No results were found for %1$s.</string>
     <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
